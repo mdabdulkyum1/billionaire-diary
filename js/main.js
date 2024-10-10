@@ -13,6 +13,6 @@ const showLoading = () => {
         userDataContainer.classList.remove('hidden')
     }, 500);
 }
-
+showLoading();
 loadUsers();
 
