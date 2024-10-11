@@ -2,6 +2,7 @@ const loadUsers = async () => {
     const res = await fetch('https://forbes400.onrender.com/api/forbes400?limit=10');
     const data = await res.json();
     renderRandomUsers(data);
+    showAllB(data)
 }
 
 const showLoading = () => {
@@ -16,3 +17,4 @@ const showLoading = () => {
 showLoading();
 loadUsers();
 
+ 

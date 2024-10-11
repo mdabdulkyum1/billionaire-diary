@@ -6,26 +6,21 @@ const renderRandomUsers = (users) => {
         const showTotalWorth = document.getElementById('totalWorth');
 
         const randomValue = getRandomValue(users.length);
-
         let randomUser = users[randomValue]
 
         const existsUsers = randomUsers.find(user => user.person.name === randomUser.person.name);
-        existsUsers ? `${showExistsSms()}` : randomUsers.push(randomUser) ;
-        
+        existsUsers ? `${showExistsSms()}` : randomUsers.push(randomUser);
 
         const existsWealths = wealths.find(wealth => wealth === randomUser.finalWorth)
         existsWealths ? 0 : wealths.push(randomUser.finalWorth);
-        
 
         let totalWealths = wealths.reduce((acc, curr) => acc + curr, 0);
         showTotalWorth.innerText = `$${totalWealths.toFixed(3)}`
 
         // call functions
         displayUsers(randomUsers)
+        sortByRank(randomUsers)
     });
-
-
-
 }
 // generate random number array
 const getRandomValue = (length) => {
@@ -38,6 +33,24 @@ const showExistsSms = () => {
     setTimeout(() => {
         message.classList.add("hidden");
     }, 2000);
+}
+
+// Sort By Rank (Descending)
+const sortByRank = (users) => {
+    document.getElementById('sort-by-rank').addEventListener('click', () => {
+        showLoading();
+        const sortedUsers = users.sort((a, b) => b.rank - a.rank);
+        displayUsers(sortedUsers);
+    });
+}
+// Show All Billionaires
+const showAllB = (users) => {
+    const userDataContainer = document.getElementById('user-data-container');
+    document.getElementById('show-all-b').addEventListener('click', () => {
+        userDataContainer.classList.remove('hidden');
+        displayUsers(users);
+        sortByRank(users)
+    });
 }
 
 /// display users
