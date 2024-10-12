@@ -1,31 +1,35 @@
 let randomUsers = [];
-// count wealth
-let wealths = [];
 const renderRandomUsers = (users) => {
     document.getElementById('add-user-randomly').addEventListener('click', () => {
-        const showTotalWorth = document.getElementById('totalWorth');
-
+        const totalWorthCon = document.getElementById('totalWorth');
         const randomValue = getRandomValue(users.length);
         let randomUser = users[randomValue]
 
         const existsUsers = randomUsers.find(user => user.person.name === randomUser.person.name);
         existsUsers ? `${showExistsSms()}` : randomUsers.push(randomUser);
 
-        const existsWealths = wealths.find(wealth => wealth === randomUser.finalWorth)
-        existsWealths ? 0 : wealths.push(randomUser.finalWorth);
-
-        let totalWealths = wealths.reduce((acc, curr) => acc + curr, 0);
-        showTotalWorth.innerText = `$${totalWealths.toFixed(3)}`
-
+        totalWorthCon.innerHTML = "$0.00";
         // call functions
         displayUsers(randomUsers)
         sortByRank(randomUsers)
+        calculateWealth(randomUsers)
     });
 }
 // generate random number array
 const getRandomValue = (length) => {
     return Math.floor(Math.random() * length)
 }
+// Calculate Entire Wealth
+
+const calculateWealth = (users) => {
+    const totalWorthCon = document.getElementById('totalWorth');
+    const totalWorth = users.reduce((acc, curr) => acc + curr.finalWorth , 0)
+    const finalWorth = totalWorth.toFixed(3)
+    document.getElementById('calculateWealth').addEventListener('click', ()=>{
+        totalWorthCon.innerText = `$${finalWorth}`;
+    })
+}
+
 // existsSms
 const showExistsSms = () => {
     const message = document.getElementById('existsSms');
@@ -45,11 +49,14 @@ const sortByRank = (users) => {
 }
 // Show All Billionaires
 const showAllB = (users) => {
+    const totalWorthCon = document.getElementById('totalWorth');
     const userDataContainer = document.getElementById('user-data-container');
     document.getElementById('show-all-b').addEventListener('click', () => {
         userDataContainer.classList.remove('hidden');
+        totalWorthCon.innerHTML = `$0.00`;
         displayUsers(users);
         sortByRank(users)
+        calculateWealth(users)
     });
 }
 
