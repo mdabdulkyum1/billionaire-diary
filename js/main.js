@@ -11,15 +11,14 @@ const loadRichestByTexas = async () => {
     richestByStatesTexas(data);
 }
 const loadRichestByTechnology = async () => {
-   try{
-    const res = await fetch('https://forbes400.onrender.com/api/forbes400/industries/technology');
-    const data = await res.json();
-    showLoading();
-    richestByTechnology(data);
-   }
-   catch(err){
-      console.error(err)
-   }
+    try {
+        const res = await fetch('https://forbes400.onrender.com/api/forbes400/industries/technology');
+        const data = await res.json();
+        showLoading();
+        richestByTechnology(data);
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 
@@ -32,9 +31,21 @@ const showLoading = () => {
         userDataContainer.classList.remove('hidden')
     }, 500);
 }
+
+   // Toggle the sidebar for mobile
+// Toggle the sidebar for mobile
+const sidebar = document.getElementById('sidebar');
+const toggleButton = document.getElementById('sidebarToggle');
+
+toggleButton.addEventListener('click', () => {
+  if (sidebar.classList.contains('-translate-x-full')) {
+    sidebar.classList.remove('-translate-x-full');
+  } else {
+    sidebar.classList.add('-translate-x-full');
+  }
+});
+
+
 showLoading();
 loadRichestByTexas()
 loadUsers();
-
-
- 
