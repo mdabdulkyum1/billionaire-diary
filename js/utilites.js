@@ -23,9 +23,9 @@ const getRandomValue = (length) => {
 
 const calculateWealth = (users) => {
     const totalWorthCon = document.getElementById('totalWorth');
-    const totalWorth = users.reduce((acc, curr) => acc + curr.finalWorth , 0)
+    const totalWorth = users.reduce((acc, curr) => acc + curr.finalWorth, 0)
     const finalWorth = totalWorth.toFixed(3)
-    document.getElementById('calculateWealth').addEventListener('click', ()=>{
+    document.getElementById('calculateWealth').addEventListener('click', () => {
         totalWorthCon.innerText = `$${finalWorth}`;
     })
 }
@@ -52,6 +52,7 @@ const showAllB = (users) => {
     const totalWorthCon = document.getElementById('totalWorth');
     const userDataContainer = document.getElementById('user-data-container');
     document.getElementById('show-all-b').addEventListener('click', () => {
+        showLoading();
         userDataContainer.classList.remove('hidden');
         totalWorthCon.innerHTML = `$0.00`;
         displayUsers(users);
@@ -59,7 +60,27 @@ const showAllB = (users) => {
         calculateWealth(users)
     });
 }
+// richestByTechnology
+const richestByTechnology = (users) => {
+    console.log(users)
+    const totalWorthCon = document.getElementById('totalWorth');
+    totalWorthCon.innerHTML = "$0.00";
+    displayUsers(users);
+    sortByRank(users)
+    calculateWealth(users)
+}
+// richestByStatesTexas
+const richestByStatesTexas = (users) => {
+    const totalWorthCon = document.getElementById('totalWorth');
 
+    document.getElementById('richestByStatesTexas').addEventListener('click', () => {
+        totalWorthCon.innerHTML = "$0.00";
+        showLoading();
+        displayUsers(users);
+        sortByRank(users)
+        calculateWealth(users)
+    });
+}
 /// display users
 const displayUsers = (users) => {
 
