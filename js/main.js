@@ -1,14 +1,24 @@
 const loadUsers = async () => {
-    const res = await fetch('https://forbes400.onrender.com/api/forbes400/');
-    const data = await res.json();
-    renderRandomUsers(data);
-    showAllB(data)
+    try {
+        const res = await fetch('https://forbes400.onrender.com/api/forbes400/');
+        const data = await res.json();
+        renderRandomUsers(data);
+        showAllB(data)
+    } catch (err) {
+        console.error(err)
+    }
+
 }
 
 const loadRichestByTexas = async () => {
-    const res = await fetch('https://forbes400.onrender.com/api/forbes400/states/Texas');
-    const data = await res.json();
-    richestByStatesTexas(data);
+    try {
+        const res = await fetch('https://forbes400.onrender.com/api/forbes400/states/Texas');
+        const data = await res.json();
+        richestByStatesTexas(data);
+ 
+    } catch (err) {
+        console.error(err)
+    }
 }
 const loadRichestByTechnology = async () => {
     try {
@@ -16,6 +26,7 @@ const loadRichestByTechnology = async () => {
         const data = await res.json();
         showLoading();
         richestByTechnology(data);
+        showUsersDetails(data);
     } catch (err) {
         console.error(err)
     }
@@ -32,17 +43,17 @@ const showLoading = () => {
     }, 500);
 }
 
-   // Toggle the sidebar for mobile
+// Toggle the sidebar for mobile
 // Toggle the sidebar for mobile
 const sidebar = document.getElementById('sidebar');
 const toggleButton = document.getElementById('sidebarToggle');
 
 toggleButton.addEventListener('click', () => {
-  if (sidebar.classList.contains('-translate-x-full')) {
-    sidebar.classList.remove('-translate-x-full');
-  } else {
-    sidebar.classList.add('-translate-x-full');
-  }
+    if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+    } else {
+        sidebar.classList.add('-translate-x-full');
+    }
 });
 
 
