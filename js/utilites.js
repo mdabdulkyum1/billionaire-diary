@@ -47,6 +47,7 @@ const sortByRank = (users) => {
         showLoading();
         const sortedUsers = users.sort((a, b) => b.rank - a.rank);
         displayUsers(sortedUsers);
+        showUsersDetails(sortedUsers);
     });
 }
 // Show All Billionaires
